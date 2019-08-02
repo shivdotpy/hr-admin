@@ -1,7 +1,22 @@
-import React, { Component } from 'react'
-import { Grid, Card, CardContent, Typography, TextField, Button } from '@material-ui/core'
+import React, { Component } from 'react';
+import { Card, CardContent, Typography, TextField, Button } from '@material-ui/core';
+import { connect } from 'react-redux';
+import {adminLogin} from './actions'
 
-export default class Login extends Component {
+class Login extends Component {
+
+    componentDidMount() {
+        this.onLoginSubmit({})
+    }
+
+    onLoginSubmit = (formProps) => {
+        formProps = {}
+        formProps.mobile = '9876542111'
+        formProps.password = '123456'
+
+        this.props.adminLogin(formProps)
+    }
+
     render() {
         return (
             <div className="container-fluid">
@@ -11,7 +26,8 @@ export default class Login extends Component {
                         <Card>
                             <CardContent>
                                 <div className="row text-center m-3 mb-5">
-                                    <Typography variant="h2">
+                                <i class="zmdi zmdi-account zmdi-hc-4x"></i>
+                                    <Typography variant="h2" className="ml-2">
                                         HR Login
                                     </Typography>
                                 </div>
@@ -46,3 +62,16 @@ export default class Login extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+
+    console.log(state);
+    
+
+    return {
+
+    }
+}
+
+
+export default connect(mapStateToProps, {adminLogin})(Login)
