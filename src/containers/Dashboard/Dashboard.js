@@ -5,7 +5,7 @@ export default class Dashboard extends Component {
     render() {
         return (
             <div>
-                <Header/>
+                <Header history={this.props.history}/>
             </div>
         )
     }

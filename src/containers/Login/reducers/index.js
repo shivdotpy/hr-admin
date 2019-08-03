@@ -1,7 +1,7 @@
 import {loginActionTypes} from '../constants';
 
 const initialState = {
-    loading: false   
+    loading: false
 }
 
 export default (state=initialState, {type, payload}) => {

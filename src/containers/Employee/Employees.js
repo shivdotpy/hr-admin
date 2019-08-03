@@ -6,7 +6,7 @@ export default class Employees extends Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header history={this.props.history}/>
                 <div className="m-5">
                     <EmployeesTable />
                 </div>

@@ -4,29 +4,29 @@ import { connect } from 'react-redux';
 import { adminLogin } from './actions';
 import { Field, reduxForm } from 'redux-form';
 import validate from './validation/validate';
-import {isMobile} from '../../utils/normalize';
+import { isMobile } from '../../utils/normalize';
 
 // Redux form components
 import { renderTextField } from '../../components/fields/reduxFields';
 
 class Login extends Component {
 
-    constructor(props) {
-        super(props)
-    }
-
-    componentDidMount() {
+    componentWillReceiveProps(nextProps, ownProps) {
+        if (nextProps.loggedIn) {
+            this.props.history.push('/dashboard')
+        }
     }
 
     onLoginSubmit = (formProps) => {
-        console.log('formprops', formProps)
-        formProps = {}
-        // this.props.adminLogin(formProps)
+        const requestBody = {
+            mobile: formProps.mobile,
+            password: formProps.password
+        }
+        this.props.adminLogin(requestBody, this.props.history)
     }
 
     render() {
         const { handleSubmit } = this.props;
-        console.log(this.props)
         return (
             <div className="container-fluid">
                 <div className="row mtcent15">
@@ -49,7 +49,7 @@ class Login extends Component {
                                                 type="text"
                                                 normalize={isMobile}
                                                 fullWidth={true}
-                                                component={renderTextField}                                            />
+                                                component={renderTextField} />
                                         </div>
                                     </div>
                                     <div className="row text-center m-3">
@@ -80,7 +80,9 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
+
     return {
+        loggedIn: state.login.loggedIn
     }
 }
 
