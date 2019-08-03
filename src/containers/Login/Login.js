@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { adminLogin } from './actions';
 import { Field, reduxForm } from 'redux-form';
 import validate from './validation/validate';
+import {isMobile} from '../../utils/normalize';
 
 // Redux form components
 import { renderTextField } from '../../components/fields/reduxFields';
@@ -20,9 +21,6 @@ class Login extends Component {
     onLoginSubmit = (formProps) => {
         console.log('formprops', formProps)
         formProps = {}
-        // formProps.mobile = '9876542111'
-        // formProps.password = '123456'
-
         // this.props.adminLogin(formProps)
     }
 
@@ -46,8 +44,10 @@ class Login extends Component {
                                     <div className="row text-center m-3">
                                         <div className="col">
                                             <Field
-                                                name="email"
-                                                label="Email"
+                                                name="mobile"
+                                                label="Mobile"
+                                                type="text"
+                                                normalize={isMobile}
                                                 fullWidth={true}
                                                 component={renderTextField}                                            />
                                         </div>
@@ -57,6 +57,7 @@ class Login extends Component {
                                             <Field
                                                 name="password"
                                                 label="Password"
+                                                type="password"
                                                 fullWidth={true}
                                                 component={renderTextField} />
                                         </div>

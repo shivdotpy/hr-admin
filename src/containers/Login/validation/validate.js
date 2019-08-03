@@ -2,8 +2,8 @@ const validate = (values) => {
 
     const error = {};
 
-    if (!values.email) {
-        error.email = 'Please enter email'        
+    if (!values.mobile) {
+        error.mobile = 'Please enter mobile'        
     }
 
     if (!values.password) {
