@@ -6,14 +6,18 @@ import allReducers from "./reducers";
 // import * as serviceWorker from './serviceWorker';
 
 // Thunk
-import { applyMiddleware, compose, createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+
+// Dev Tools
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 
 const Store = createStore(
     allReducers,
-    compose(
+    window.__REDUX_DEVTOOLS_EXTENSION_ && window.__REDUX_DEVTOOLS_EXTENSION_(),
+    composeWithDevTools(
       applyMiddleware(thunk)
     )
   );

@@ -1,23 +1,34 @@
 import React, { Component } from 'react';
-import { Card, CardContent, Typography, TextField, Button } from '@material-ui/core';
+import { Card, CardContent, Typography, Button } from '@material-ui/core';
 import { connect } from 'react-redux';
-import {adminLogin} from './actions'
+import { adminLogin } from './actions';
+import { Field, reduxForm } from 'redux-form';
+import validate from './validation/validate';
+
+// Redux form components
+import { renderTextField } from '../../components/fields/reduxFields';
 
 class Login extends Component {
 
+    constructor(props) {
+        super(props)
+    }
+
     componentDidMount() {
-        this.onLoginSubmit({})
     }
 
     onLoginSubmit = (formProps) => {
+        console.log('formprops', formProps)
         formProps = {}
-        formProps.mobile = '9876542111'
-        formProps.password = '123456'
+        // formProps.mobile = '9876542111'
+        // formProps.password = '123456'
 
-        this.props.adminLogin(formProps)
+        // this.props.adminLogin(formProps)
     }
 
     render() {
+        const { handleSubmit } = this.props;
+        console.log(this.props)
         return (
             <div className="container-fluid">
                 <div className="row mtcent15">
@@ -26,34 +37,38 @@ class Login extends Component {
                         <Card>
                             <CardContent>
                                 <div className="row text-center m-3 mb-5">
-                                <i class="zmdi zmdi-account zmdi-hc-4x"></i>
+                                    <i className="zmdi zmdi-account zmdi-hc-4x"></i>
                                     <Typography variant="h2" className="ml-2">
                                         HR Login
                                     </Typography>
                                 </div>
-                                <div className="row text-center m-3">
-                                    <div className="col">
-                                        <TextField
-                                            fullWidth
-                                            label="Email"
-                                        />
+                                <form onSubmit={handleSubmit(this.onLoginSubmit)}>
+                                    <div className="row text-center m-3">
+                                        <div className="col">
+                                            <Field
+                                                name="email"
+                                                label="Email"
+                                                fullWidth={true}
+                                                component={renderTextField}                                            />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="row text-center m-3">
-                                    <div className="col">
-                                        <TextField
-                                            fullWidth
-                                            label="Password"
-                                        />
+                                    <div className="row text-center m-3">
+                                        <div className="col">
+                                            <Field
+                                                name="password"
+                                                label="Password"
+                                                fullWidth={true}
+                                                component={renderTextField} />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="row mt-5">
-                                    <div className="col text-center">
-                                        <Button variant="contained" color="secondary">
-                                            Login
+                                    <div className="row mt-5">
+                                        <div className="col text-center">
+                                            <Button variant="contained" color="secondary" type="submit">
+                                                Login
                                         </Button>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </CardContent>
                         </Card>
                     </div>
@@ -64,14 +79,14 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-
-    console.log(state);
-    
-
     return {
-
     }
 }
 
 
-export default connect(mapStateToProps, {adminLogin})(Login)
+export default connect(mapStateToProps, {
+    adminLogin
+})(reduxForm({
+    form: 'loginForm',
+    validate
+})(Login))

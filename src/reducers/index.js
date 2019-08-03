@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { reducer as formReducer } from 'redux-form'
 import LoginReducer from '../containers/Login/reducers';
 
 const rootReducer = (state, action) => {
@@ -6,7 +7,8 @@ const rootReducer = (state, action) => {
 };
 
 const appReducers = combineReducers({
-    login: LoginReducer
+    login: LoginReducer,
+    form: formReducer
 })
 
 export default rootReducer;
