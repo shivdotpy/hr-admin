@@ -10,15 +10,10 @@ export default class DashboardTable extends Component {
                         { title: "FirstName", field: "firstName" },
                         { title: "LastName", field: "lastName"},
                         { title: "Mobile Number", field: "mobile"},
-                        {title: "Department", field: "department"}
+                        {title: "Role", field: "role"}
                         
                     ]}
-                    data={[
-                        { empId: 1, firstName: "shankar", lastName: "sharma", department: "development", mobile: "9999999999"},
-                        { empId: 1, firstName: "shankar", lastName: "sharma", department: "development", mobile: "9999999999"},
-                        { empId: 1, firstName: "shankar", lastName: "sharma", department: "development", mobile: "9999999999"},
-                        { empId: 1, firstName: "shankar", lastName: "sharma", department: "development", mobile: "9999999999"}
-                    ]}
+                    data={this.props.employee_list}
                     title="Employees"
                     actions={[
                         {
@@ -34,7 +29,8 @@ export default class DashboardTable extends Component {
                         })
                       ]}
                       options={{
-                        actionsColumnIndex: -1
+                        actionsColumnIndex: -1,
+                        pageSize: 10
                       }}
                 />
         )

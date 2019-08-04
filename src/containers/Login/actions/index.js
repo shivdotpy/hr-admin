@@ -1,4 +1,4 @@
-import { actionCreator, jsonApiHeader, getAccessTokenFromLocalStorage } from "../../../utils";
+import { actionCreator } from "../../../utils";
 import { loginActionTypes, ADMIN_LOGIN_API } from "../constants";
 import axios from 'axios';
 import Alert from 'react-s-alert';
@@ -27,22 +27,5 @@ export const adminLogin = (data, history) => {
                 timeout: 2000
             });
         })
-        
-        // fetch(`${ADMIN_LOGIN_API}`, {
-        //     method: 'POST',
-        //     headers: jsonApiHeader(getAccessTokenFromLocalStorage(), 'application/json'),
-        //     body: JSON.stringify(data),
-        // })
-        //     .then(response => response.json())
-        //     .then(response => {
-        //         debugger;
-        //         if (response.status === 200 || response.status === 201) {
-        //             localStorage.setItem('admin_token', response.token)
-        //             dispatch(actionCreator(loginActionTypes.admin_login.SUCCESS, response))
-        //         }
-        //     })
-        //     .catch(error => {
-        //         dispatch(actionCreator(loginActionTypes.admin_login.FAILURE))
-        //     })
     }
 }

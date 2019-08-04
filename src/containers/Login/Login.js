@@ -64,7 +64,7 @@ class Login extends Component {
                                     </div>
                                     <div className="row mt-5">
                                         <div className="col text-center">
-                                            <Button variant="contained" color="secondary" type="submit">
+                                            <Button variant="contained" color="primary" type="submit">
                                                 Login
                                         </Button>
                                         </div>

@@ -5,6 +5,7 @@ export const renderTextField = ({
     input,
     fullWidth,
     label,
+    disabled,
     meta: { touched, error },
     ...custom
 }) => {
@@ -13,6 +14,7 @@ export const renderTextField = ({
             name
             fullWidth={fullWidth}
             label={label}
+            disabled={disabled ? disabled : false}
             helperText={touched && error}
             error={touched && error ? true : false}
             {...input}
