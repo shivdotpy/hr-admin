@@ -3,10 +3,8 @@ import Header from '../../components/header/Header';
 import EmployeesTable from './components/EmployeesTable';
 import EmployeeModal from './components/EmployeeModal';
 import { connect } from 'react-redux';
-import { getAllEmployees } from './actions';
-import { Button} from '@material-ui/core';
-import {change} from 'redux-form';
-
+import { getAllEmployees, getEmployeeById } from './actions';
+import { Button } from '@material-ui/core';
 
 
 class Employees extends Component {
@@ -28,8 +26,27 @@ class Employees extends Component {
         this.setState({ openEmployeeModal: false })
     }
 
-    openEmployeeModal = () => {
-        this.setState({ openEmployeeModal: true })
+    openEmployeeModal = (empId) => {
+
+        // If we are not checking that empId if interger or not it is giving class (reason: unknown)
+        this.setState({
+            openEmployeeModal: true,
+            employeeModalTitle: Number.isInteger(empId) ? 'Edit' : 'Add' // **
+        })
+
+        if (Number.isInteger(empId)) {
+            this.props.getEmployeeById(empId)
+        }
+
+    }
+
+    componentWillReceiveProps(nextProps) {
+        
+        // If add employee request succeeds , call get all employees
+        if (nextProps.add_employee && nextProps.add_employee !== this.props.add_employee) {
+            this.props.getAllEmployees()
+        }
+
     }
 
     render() {
@@ -42,13 +59,17 @@ class Employees extends Component {
                     </Button>
                 </div>
                 <div className="mx-5 mt-4">
-                    <EmployeesTable employee_list={this.props.employee_list} />
+                    <EmployeesTable
+                        employee_list={this.props.employee_list}
+                        openEditEmployeeModal={this.openEmployeeModal}
+                    />
                 </div>
                 <div>
                     <EmployeeModal
                         employeeModalTitle={this.state.employeeModalTitle}
                         closeEmployeeModal={this.closeEmployeeModal}
                         openEmployeeModal={this.state.openEmployeeModal}
+
                     />
                 </div>
             </div>
@@ -59,8 +80,9 @@ class Employees extends Component {
 const mapStateToProps = (state) => {
 
     return {
-        employee_list: state.employee.employee_list
+        employee_list: state.employee.employee_list,
+        add_employee: state.employee.add_employee,
     }
 }
 
-export default connect(mapStateToProps, { getAllEmployees })(Employees)
+export default connect(mapStateToProps, { getAllEmployees, getEmployeeById })(Employees)

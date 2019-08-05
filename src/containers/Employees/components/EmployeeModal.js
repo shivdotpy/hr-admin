@@ -14,14 +14,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 class EmployeeModal extends Component {
 
     onAddEmployeeSubmit = (formProps) => {
-        console.log('form data', formProps)
         this.props.saveEmployee(formProps)
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.add_employee_success && nextProps.add_employee_success !== this.props.add_employee_success) {
             this.props.closeEmployeeModal()
-            console.log('coming')
         }
     }
 
@@ -46,6 +44,7 @@ class EmployeeModal extends Component {
                                         label="Emp ID"
                                         type="text"
                                         fullWidth={true}
+                                        required={true}
                                         component={renderTextField}
                                     />
                                 </div>
@@ -55,6 +54,7 @@ class EmployeeModal extends Component {
                                         label="Mobile No."
                                         type="text"
                                         fullWidth={true}
+                                        required={true}
                                         component={renderTextField}
                                     />
                                 </div>
@@ -64,6 +64,7 @@ class EmployeeModal extends Component {
                                         label="First Name"
                                         type="text"
                                         fullWidth={true}
+                                        required={true}
                                         component={renderTextField}
                                     />
                                 </div>
@@ -73,13 +74,14 @@ class EmployeeModal extends Component {
                                         label="Last Name"
                                         type="text"
                                         fullWidth={true}
+                                        required={true}
                                         component={renderTextField}
                                     />
                                 </div>
                                 <div className="col-md-6  mb-3">
                                     <Field
                                         name="role"
-                                        label="Role (admin, employee)"
+                                        label="Role"
                                         type="text"
                                         disabled={true}
                                         fullWidth={true}
@@ -92,6 +94,7 @@ class EmployeeModal extends Component {
                                         label="Salary (LPA)"
                                         type="text"
                                         fullWidth={true}
+                                        required={true}
                                         component={renderTextField}
                                     />
                                 </div>
@@ -114,11 +117,18 @@ class EmployeeModal extends Component {
 }
 
 const mapStateToProps = (state) => {    
-
-    console.log('employee state', state.employee.add_employee)
-
     let initialData = {
         role: 'employee'
+    }
+
+    if (state.employee.employee_by_id) {
+        let employeeData = state.employee.employee_by_id;
+        initialData.empId = employeeData.empId
+        initialData.mobile = employeeData.mobile
+        initialData.firstName = employeeData.firstName
+        initialData.lastName = employeeData.lastName
+        initialData.role = employeeData.role
+        initialData.salary = employeeData.salary     
     }
 
     return {
@@ -130,5 +140,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {saveEmployee})(reduxForm({
     form: 'employeeForm',
+    enableReinitialize: true,
     validate
 })(EmployeeModal))

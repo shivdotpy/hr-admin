@@ -1,5 +1,11 @@
 import axios from "axios";
-import { employeesActionTypes, EMPLOYEES_LIST_API, ADD_EMPLOYEE_API } from '../constants'
+import {
+    employeesActionTypes,
+    EMPLOYEES_LIST_API,
+    ADD_EMPLOYEE_API,
+    DELETE_EMPLOYEE_API,
+    GET_EMPLOYEE_BY_ID_API
+} from '../constants'
 import { actionCreator, jsonApiHeader, getAccessTokenFromLocalStorage } from '../../../utils'
 import Alert from 'react-s-alert'
 
@@ -41,5 +47,39 @@ export const saveEmployee = (data) => {
                     timeout: 2000
                 });
             })
+    }
+}
+
+export const getEmployeeById = (empId) => {
+    return (dispatch) => {
+        dispatch(actionCreator(employeesActionTypes.get_employee_by_id.REQUEST))
+        axios.get(`${GET_EMPLOYEE_BY_ID_API}/${empId}`, { headers: jsonApiHeader(getAccessTokenFromLocalStorage(), 'application/json') })
+        .then(response => {
+            dispatch(actionCreator(employeesActionTypes.get_employee_by_id.SUCCESS, response.data.data))
+        })
+        .catch(error => {
+            dispatch(actionCreator(employeesActionTypes.get_employee_by_id.FAILURE))
+        })
+    }
+}
+
+export const deleteEmployee = (empId) => {
+    return (dispatch) => {
+        dispatch(actionCreator(employeesActionTypes.delete_employee.REQUEST))
+        axios.delete(`${DELETE_EMPLOYEE_API}/${empId}`, { headers: jsonApiHeader(getAccessTokenFromLocalStorage(), 'application/json') })
+        .then(response => {
+            Alert.success(response.data.message, {
+                position: 'top-right',
+                effect: 'slide',
+                timeout: 1000
+            })
+        })
+        .catch(error => {
+            Alert.error(error.response.data.message, {
+                position: 'top-right',
+                effect: 'slide',
+                timeout: 2000
+            });
+        })
     }
 }
