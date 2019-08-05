@@ -8,6 +8,7 @@ import {
 } from '../constants'
 import { actionCreator, jsonApiHeader, getAccessTokenFromLocalStorage } from '../../../utils'
 import Alert from 'react-s-alert'
+import {reset} from 'redux-form';
 
 
 export const getAllEmployees = () => {
@@ -38,6 +39,7 @@ export const saveEmployee = (data) => {
                     effect: 'slide',
                     timeout: 1000
                 })
+                dispatch(reset('employeeForm'));
             })
             .catch(error => {
                 dispatch(actionCreator(employeesActionTypes.add_employee.FAILURE))
@@ -68,6 +70,7 @@ export const deleteEmployee = (empId) => {
         dispatch(actionCreator(employeesActionTypes.delete_employee.REQUEST))
         axios.delete(`${DELETE_EMPLOYEE_API}/${empId}`, { headers: jsonApiHeader(getAccessTokenFromLocalStorage(), 'application/json') })
         .then(response => {
+            dispatch(actionCreator(employeesActionTypes.delete_employee.SUCCESS))
             Alert.success(response.data.message, {
                 position: 'top-right',
                 effect: 'slide',
@@ -75,6 +78,7 @@ export const deleteEmployee = (empId) => {
             })
         })
         .catch(error => {
+            dispatch(actionCreator(employeesActionTypes.delete_employee.FAILURE))
             Alert.error(error.response.data.message, {
                 position: 'top-right',
                 effect: 'slide',

@@ -60,6 +60,21 @@ export default (state = initialState, { type, payload }) => {
                 ...state,
                 employee_by_id: null
             }
+        case employeesActionTypes.delete_employee.REQUEST:
+            return {
+                ...state,
+                delete_employee: false
+            }
+        case employeesActionTypes.delete_employee.SUCCESS:
+            return {
+                ...state,
+                delete_employee: true
+            }
+        case employeesActionTypes.delete_employee.FAILURE:
+            return {
+                ...state,
+                delete_employee: false
+            }
         default:
             return state
     }

@@ -47,6 +47,10 @@ class Employees extends Component {
             this.props.getAllEmployees()
         }
 
+        if (nextProps.delete_employee && nextProps.delete_employee !== this.props.delete_employee) {
+            this.props.getAllEmployees()
+        }
+
     }
 
     render() {
@@ -82,6 +86,7 @@ const mapStateToProps = (state) => {
     return {
         employee_list: state.employee.employee_list,
         add_employee: state.employee.add_employee,
+        delete_employee: state.employee.delete_employee
     }
 }
 
