@@ -87,3 +87,10 @@ export const deleteEmployee = (empId) => {
         })
     }
 }
+
+
+export const clearEmployeeForm = () => {
+    return (dispatch) => {
+        dispatch(actionCreator(employeesActionTypes.get_employee_by_id.REQUEST))
+    }
+}

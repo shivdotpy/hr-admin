@@ -3,8 +3,9 @@ import Header from '../../components/header/Header';
 import EmployeesTable from './components/EmployeesTable';
 import EmployeeModal from './components/EmployeeModal';
 import { connect } from 'react-redux';
-import { getAllEmployees, getEmployeeById } from './actions';
+import { getAllEmployees, getEmployeeById, clearEmployeeForm } from './actions';
 import { Button } from '@material-ui/core';
+import {reset} from 'redux-form';
 
 
 class Employees extends Component {
@@ -23,10 +24,15 @@ class Employees extends Component {
     }
 
     closeEmployeeModal = () => {
-        this.setState({ openEmployeeModal: false })
+        this.setState({ openEmployeeModal: false }, () => {
+            this.props.clearEmployeeForm()
+        })
     }
 
     openEmployeeModal = (empId) => {
+
+        
+        this.props.dispatch(reset('employeeForm'))
 
         // If we are not checking that empId if interger or not it is giving class (reason: unknown)
         this.setState({
@@ -41,7 +47,7 @@ class Employees extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        
+
         // If add employee request succeeds , call get all employees
         if (nextProps.add_employee && nextProps.add_employee !== this.props.add_employee) {
             this.props.getAllEmployees()
@@ -90,4 +96,22 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getAllEmployees, getEmployeeById })(Employees)
+
+// { getAllEmployees, getEmployeeById, clearEmployeeForm }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getAllEmployees: () => {
+            dispatch(getAllEmployees())
+        },
+        getEmployeeById: (id) => {
+            dispatch(getEmployeeById(id))
+        },
+        clearEmployeeForm: () => {
+            dispatch(clearEmployeeForm())
+        },
+        dispatch
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Employees)
