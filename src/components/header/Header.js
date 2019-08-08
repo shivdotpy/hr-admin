@@ -7,6 +7,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import {  List, ListItem, Drawer, ListItemText } from '@material-ui/core';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -26,12 +30,20 @@ const Header = (props) => {
     const open = Boolean(anchorEl);
 
 
+    // Hook for drawer
+    const [openDrawer, serDrawer] = React.useState(false);
+
+
     function handleMenu(event) {
         setAnchorEl(event.currentTarget);
     }
 
     function handleClose() {
         setAnchorEl(null);
+    }
+
+    function handleToggleDrawer() {
+        serDrawer(!openDrawer)
     }
 
     const logout = () => {
@@ -41,9 +53,22 @@ const Header = (props) => {
 
     return (
         <div className={classes.root}>
+            <Drawer open={openDrawer} onClose={handleToggleDrawer} >
+            <div className="p-3">
+                    <h3 className="text-center">HR Admin</h3>
+                    <List>
+                        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                            <ListItem button key={text}>
+                                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                                <ListItemText primary={text} />
+                            </ListItem>
+                        ))}
+                    </List>
+                </div>
+            </Drawer>
             <AppBar position="static">
                 <Toolbar className="d-flex justify-content-between">
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={handleToggleDrawer}>
                         <MenuIcon />
                     </IconButton>
                     <div>

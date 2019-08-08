@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { renderTextField } from '../../../components/fields/reduxFields';
 import validate from '../validation/validate'
-import {saveEmployee} from '../actions'
+import {saveEmployee, updateEmployee} from '../actions'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -14,7 +14,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 class EmployeeModal extends Component {
 
     onAddEmployeeSubmit = (formProps) => {
-        this.props.saveEmployee(formProps)
+        if (this.props.employee_by_id) {
+            this.props.updateEmployee(formProps.empId, formProps)
+        } else {
+            this.props.saveEmployee(formProps)
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -43,6 +47,7 @@ class EmployeeModal extends Component {
                                         name="empId"
                                         label="Emp ID"
                                         type="text"
+                                        disabled={this.props.employee_by_id}
                                         fullWidth={true}
                                         required={true}
                                         component={renderTextField}
@@ -133,12 +138,13 @@ const mapStateToProps = (state) => {
 
     return {
         initialValues: initialData,
-        add_employee_success: state.employee.add_employee
+        add_employee_success: state.employee.add_employee,
+        employee_by_id: state.employee.employee_by_id
     }
 }
 
 
-export default connect(mapStateToProps, {saveEmployee})(reduxForm({
+export default connect(mapStateToProps, {saveEmployee, updateEmployee})(reduxForm({
     form: 'employeeForm',
     enableReinitialize: true,
     validate

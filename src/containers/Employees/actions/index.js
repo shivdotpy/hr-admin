@@ -4,7 +4,8 @@ import {
     EMPLOYEES_LIST_API,
     ADD_EMPLOYEE_API,
     DELETE_EMPLOYEE_API,
-    GET_EMPLOYEE_BY_ID_API
+    GET_EMPLOYEE_BY_ID_API,
+    UPDATE_EMPLOYEE_BY_ID
 } from '../constants'
 import { actionCreator, jsonApiHeader, getAccessTokenFromLocalStorage } from '../../../utils'
 import Alert from 'react-s-alert'
@@ -61,6 +62,19 @@ export const getEmployeeById = (empId) => {
         })
         .catch(error => {
             dispatch(actionCreator(employeesActionTypes.get_employee_by_id.FAILURE))
+        })
+    }
+}
+
+export const updateEmployee = (empId, data) => {
+    return (dispatch) => {
+        dispatch(actionCreator(employeesActionTypes.update_employee_by_id.REQUEST))
+        axios.patch(`${UPDATE_EMPLOYEE_BY_ID}/${empId}`, data, { headers: jsonApiHeader(getAccessTokenFromLocalStorage(), 'application/json') })
+        .then(response => {
+            dispatch(actionCreator(employeesActionTypes.update_employee_by_id.SUCCESS))
+        })
+        .catch(error => {
+            dispatch(actionCreator(employeesActionTypes.update_employee_by_id.FAILURE))
         })
     }
 }

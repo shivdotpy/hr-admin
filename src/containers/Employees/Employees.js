@@ -5,7 +5,8 @@ import EmployeeModal from './components/EmployeeModal';
 import { connect } from 'react-redux';
 import { getAllEmployees, getEmployeeById, clearEmployeeForm } from './actions';
 import { Button } from '@material-ui/core';
-import {reset} from 'redux-form';
+import { reset } from 'redux-form';
+
 
 
 class Employees extends Component {
@@ -31,7 +32,7 @@ class Employees extends Component {
 
     openEmployeeModal = (empId) => {
 
-        
+
         this.props.dispatch(reset('employeeForm'))
 
         // If we are not checking that empId if interger or not it is giving class (reason: unknown)
@@ -62,6 +63,7 @@ class Employees extends Component {
     render() {
         return (
             <div>
+                
                 <Header history={this.props.history} />
                 <div className="row mx-5 mt-4 d-flex flex-row-reverse">
                     <Button variant="contained" color="secondary" onClick={this.openEmployeeModal}>
