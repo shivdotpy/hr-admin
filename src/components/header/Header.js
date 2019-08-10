@@ -7,11 +7,14 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import {  List, ListItem, Drawer, ListItemText } from '@material-ui/core';
+import { List, ListItem, Drawer, ListItemText } from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import SchoolIcon from '@material-ui/icons/School';
+import InvoiceIcon from '@material-ui/icons/Description'
+import LeaveManagementIcon from '@material-ui/icons/TransferWithinAStation';
+import EmployeeIcon from '@material-ui/icons/Group';
 
 
 const useStyles = makeStyles(theme => ({
@@ -56,19 +59,25 @@ const Header = (props) => {
     return (
         <div className={classes.root}>
             <Drawer open={openDrawer} onClose={handleToggleDrawer} >
-            <div className="p-3">
-                    <h3 className="text-center">HR Admin</h3>
-                    <List>
-                        <ListItem button >
-                        <ListItemIcon><SchoolIcon/></ListItemIcon>
-                                <ListItemText primary={'Quiz'}/>
+                <div className="p-2">
+                    <h3 className="text-center mt-3">HR Admin</h3>
+                    <List className="mx-3 mt-4">
+                        <ListItem button onClick={() => { props.history.push('/employees') }}>
+                            <ListItemIcon><EmployeeIcon /></ListItemIcon>
+                            <ListItemText primary={'Employees'} />
                         </ListItem>
-                        {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItem>
-                        ))} */}
+                        <ListItem button onClick={() => { props.history.push('/quiz') }}>
+                            <ListItemIcon><SchoolIcon /></ListItemIcon>
+                            <ListItemText primary={'Quiz (Interview)'} />
+                        </ListItem>
+                        <ListItem button onClick={() => { props.history.push('/salary-slip') }}>
+                            <ListItemIcon><InvoiceIcon /></ListItemIcon>
+                            <ListItemText primary={'Salary Slip'} />
+                        </ListItem>
+                        <ListItem button onClick={() => { props.history.push('/leaves') }}>
+                            <ListItemIcon><LeaveManagementIcon /></ListItemIcon>
+                            <ListItemText primary={'Leave Management'} />
+                        </ListItem>
                     </List>
                 </div>
             </Drawer>

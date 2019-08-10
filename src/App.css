@@ -4,3 +4,10 @@
 .mtcent15 {
   margin-top: 15%
 }
+
+.bg404Image {
+  background: url('./assets/img/image404.png');
+  background-size: cover;
+  height: 100vh;
+  background-position: center;
+}
