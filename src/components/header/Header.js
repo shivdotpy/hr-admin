@@ -11,6 +11,8 @@ import {  List, ListItem, Drawer, ListItemText } from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import SchoolIcon from '@material-ui/icons/School';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -57,12 +59,16 @@ const Header = (props) => {
             <div className="p-3">
                     <h3 className="text-center">HR Admin</h3>
                     <List>
-                        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                        <ListItem button >
+                        <ListItemIcon><SchoolIcon/></ListItemIcon>
+                                <ListItemText primary={'Quiz'}/>
+                        </ListItem>
+                        {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                             <ListItem button key={text}>
                                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                                 <ListItemText primary={text} />
                             </ListItem>
-                        ))}
+                        ))} */}
                     </List>
                 </div>
             </Drawer>
