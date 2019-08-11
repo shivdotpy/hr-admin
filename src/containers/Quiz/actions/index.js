@@ -44,10 +44,10 @@ export const getQuestionBySkill = (skill) => {
         // GET QUESTIONS BY SKILL
         axios.get(`${GET_QUESTION_BASED_ON_SKILLS_API}/${skill}`, { headers: jsonApiHeader(getAccessTokenFromLocalStorage(), 'application/json') })
             .then(response => {
-                console.log(response.data)
+                dispatch(actionCreator(candidateActionTypes.get_question_based_on_skills_api.SUCCESS, response.data.data))
             })
             .catch(error => {
-                console.log(error.response)
+                dispatch(actionCreator(candidateActionTypes.get_question_based_on_skills_api.FAILURE))
             })
     }
 } 

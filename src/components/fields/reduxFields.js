@@ -33,8 +33,6 @@ export const renderSingleSelect = ({
     fullWidth
 }) => {
 
-    console.log('selectedSkill', selected)
-
     return (
         <FormControl fullWidth={fullWidth ? fullWidth : null}>
             <InputLabel htmlFor="age-simple">{label}</InputLabel>

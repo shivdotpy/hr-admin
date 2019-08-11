@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { renderSingleSelect } from '../../../components/fields/reduxFields';
 import { getSkills, getQuestionBySkill } from '../actions'
+import { Paper } from '@material-ui/core';
 
 class Quiestionnaire extends Component {
 
@@ -44,6 +45,17 @@ class Quiestionnaire extends Component {
                             />
                         </div>
                     </div>
+                    <div className="row mt-5">
+                        <div className="col-12">
+                            {this.props.questions_based_on_skill.map(question => {
+                                return (
+                                    <Paper className="p-3">
+                                        <p>{question.title}</p>
+                                    </Paper>
+                                )
+                            })}
+                        </div>
+                    </div>
                 </form>
             </div>
         )
@@ -52,10 +64,9 @@ class Quiestionnaire extends Component {
 
 const mapStateToProps = (state) => {
 
-    console.log('state', state.quiz)
-
     return {
-        skillsArray: state.quiz.skills
+        skillsArray: state.quiz.skills,
+        questions_based_on_skill: state.quiz.questions_based_on_skill
     }
 }
 

@@ -3,7 +3,7 @@ import { candidateActionTypes } from '../constants';
 const initialState = {
     add_candidate: false,
     skills: [],
-    questions_based_on_skills: []
+    questions_based_on_skill: []
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -49,19 +49,19 @@ export default (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 loading: true,
-                question_based_on_skill: []
+                questions_based_on_skill: []
             }
         case candidateActionTypes.get_question_based_on_skills_api.SUCCESS:
             return {
                 ...state,
                 loading: false,
-                question_based_on_skill: payload
+                questions_based_on_skill: payload
             }
         case candidateActionTypes.get_question_based_on_skills_api.FAILURE:
             return {
                 ...state,
                 loading: false,
-                question_based_on_skill: []
+                questions_based_on_skill: []
             }
         default:
             return state
