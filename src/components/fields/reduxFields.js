@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField } from '@material-ui/core'
+import { TextField, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core'
 
 export const renderTextField = ({
     input,
@@ -22,5 +22,28 @@ export const renderTextField = ({
             {...input}
             {...custom}
         />
+    )
+}
+
+export const renderSingleSelect = ({
+    label,
+    options,
+    handleChange,
+    selected,
+    fullWidth
+}) => {
+
+    console.log('selectedSkill', selected)
+
+    return (
+        <FormControl fullWidth={fullWidth ? fullWidth : null}>
+            <InputLabel htmlFor="age-simple">{label}</InputLabel>
+            <Select
+                value={selected}
+                onChange={handleChange}
+            >
+                {options.map(item => <MenuItem value={item.skill} key={item.skill}> <span style={{ textTransform: 'capitalize' }}>{item.skill}</span></MenuItem>)}
+            </Select>
+        </FormControl>
     )
 }

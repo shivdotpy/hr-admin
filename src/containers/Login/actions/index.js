@@ -13,11 +13,11 @@ export const adminLogin = (data, history) => {
             localStorage.setItem('admin_token', response.data.token)
             history.push('/employees')
             dispatch(actionCreator(loginActionTypes.admin_login.SUCCESS))
-            Alert.success('Logged in successfully ', {
-                position: 'top-right',
-                effect: 'slide',
-                timeout: 2000
-            });
+            // Alert.success('Logged in successfully ', {
+            //     position: 'top-right',
+            //     effect: 'slide',
+            //     timeout: 2000
+            // });
         })
         .catch((error) => {
             dispatch(actionCreator(loginActionTypes.admin_login.FAILURE))

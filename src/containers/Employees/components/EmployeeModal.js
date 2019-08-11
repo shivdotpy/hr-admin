@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { renderTextField } from '../../../components/fields/reduxFields';
 import validate from '../validation/validate'
 import {saveEmployee, updateEmployee} from '../actions'
+import { isMobile } from '../../../utils/normalize';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -58,6 +59,7 @@ class EmployeeModal extends Component {
                                         name="mobile"
                                         label="Mobile No."
                                         type="text"
+                                        normalize={isMobile}
                                         fullWidth={true}
                                         required={true}
                                         component={renderTextField}

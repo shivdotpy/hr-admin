@@ -11,10 +11,11 @@ import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import Login from './containers/Login/Login'
 import Dashboard from './containers/Dashboard/Dashboard';
 import Employees from './containers/Employees/Employees';
-
+import Quiz from './containers/Quiz/Quiz';
 
 // 404 Page
 import Page404 from './Pages/Page404'
+
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='/' exact component={Login} />
         <Route path='/dashboard' exact component={Dashboard} />
         <Route path='/employees' exact component={Employees} />
+        <Route path='/quiz' exact component={Quiz} />
         <Route component={Page404} />
       </Switch>
       <Alert stack={{ limit: 2 }} />
