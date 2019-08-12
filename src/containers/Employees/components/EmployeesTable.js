@@ -20,18 +20,18 @@ class EmployeesTable extends Component {
         actions={[
           {
             icon: 'edit',
-            tooltip: 'Edit User',
+            tooltip: 'Edit Employee',
             onClick: (event, rowData) => this.props.openEditEmployeeModal(rowData.empId)
           },
           rowData => ({
             icon: 'delete',
-            tooltip: 'Delete User',
+            tooltip: 'Delete Employee',
             onClick: (event, rowData) => this.props.deleteEmployee(rowData.empId),
             disabled: rowData.role === 'admin'
           }),
           rowData => ({
             icon: 'eye',
-            tooltip: 'Delete User',
+            tooltip: 'Delete Employee',
             onClick: (event, rowData) => this.props.deleteEmployee(rowData.empId),
             disabled: rowData.role === 'admin'
           })

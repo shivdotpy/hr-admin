@@ -12,6 +12,7 @@ import Login from './containers/Login/Login'
 import Dashboard from './containers/Dashboard/Dashboard';
 import Employees from './containers/Employees/Employees';
 import Quiz from './containers/Quiz/Quiz';
+import ManageQuiz from './containers/ManageQuiz/ManageQuiz';
 
 // 404 Page
 import Page404 from './Pages/Page404'
@@ -25,6 +26,7 @@ function App() {
         <Route path='/dashboard' exact component={Dashboard} />
         <Route path='/employees' exact component={Employees} />
         <Route path='/quiz' exact component={Quiz} />
+        <Route path='/manage-quiz' exact component={ManageQuiz} />
         <Route component={Page404} />
       </Switch>
       <Alert stack={{ limit: 2 }} />
