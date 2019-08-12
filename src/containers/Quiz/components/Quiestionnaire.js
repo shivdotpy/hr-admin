@@ -86,7 +86,7 @@ class Quiestionnaire extends Component {
 
                                                 <CardActions className="d-flex flex-row-reverse">
                                                     {this.props.questions_based_on_skill.length - 1 === index ?
-                                                        <Button variant="contained" color="secondary" className="ml-2">Finish</Button> : null}
+                                                        <Button variant="contained" color="secondary" className="ml-2" onClick={this.props.goToFinalStep}>Finish</Button> : null}
                                                     <Button variant="contained" color="primary" disabled={this.props.questions_based_on_skill.length - 1 === index} onClick={() => { this.setState({ questionIndex: this.state.questionIndex + 1 }) }}>Next</Button>
                                                 </CardActions>
                                             </CardContent>

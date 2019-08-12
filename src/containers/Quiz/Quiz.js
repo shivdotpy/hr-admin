@@ -12,14 +12,20 @@ class Quiz extends Component {
         super(props)
 
         this.state = {
-            activeStep: 1
+            activeStep: 0
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.add_candidate && nextProps.add_candidate !== this.props.add_candidate) {
-            this.setState({activeStep: 1})
+            this.setState({ activeStep: 1 })
         }
+    }
+
+    goToFinalStep = () => {
+        this.setState({
+            activeStep: 2
+        })
     }
 
     render() {
@@ -32,18 +38,19 @@ class Quiz extends Component {
                         <Step>
                             <StepLabel>Candidate Basic Info</StepLabel>
                             <StepContent>
-                                <CandidateInformation/>
+                                <CandidateInformation />
                             </StepContent>
                         </Step>
                         <Step>
                             <StepLabel>Questionnaire</StepLabel>
                             <StepContent>
-                                <Quiestionnaire/>
+                                <Quiestionnaire goToFinalStep={this.goToFinalStep} />
                             </StepContent>
                         </Step>
                         <Step>
                             <StepLabel>Submission</StepLabel>
                             <StepContent>
+                                Overview
                                 <Button color="secondary" onClick={() => { console.log('finished') }}>Finish</Button>
                             </StepContent>
                         </Step>

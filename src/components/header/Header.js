@@ -13,6 +13,7 @@ import SchoolIcon from '@material-ui/icons/School';
 import InvoiceIcon from '@material-ui/icons/Description'
 import LeaveManagementIcon from '@material-ui/icons/TransferWithinAStation';
 import EmployeeIcon from '@material-ui/icons/Group';
+import AddQuizIcon from '@material-ui/icons/PlaylistAdd';
 
 
 const useStyles = makeStyles(theme => ({
@@ -64,10 +65,7 @@ const Header = (props) => {
                             <ListItemIcon><EmployeeIcon /></ListItemIcon>
                             <ListItemText primary={'Employees'} />
                         </ListItem>
-                        <ListItem button onClick={() => { props.history.push('/quiz') }}>
-                            <ListItemIcon><SchoolIcon /></ListItemIcon>
-                            <ListItemText primary={'Quiz (Interview)'} />
-                        </ListItem>
+                        
                         <ListItem button onClick={() => { props.history.push('/salary-slip') }}>
                             <ListItemIcon><InvoiceIcon /></ListItemIcon>
                             <ListItemText primary={'Salary Slip'} />
@@ -75,6 +73,14 @@ const Header = (props) => {
                         <ListItem button onClick={() => { props.history.push('/leaves') }}>
                             <ListItemIcon><LeaveManagementIcon /></ListItemIcon>
                             <ListItemText primary={'Leave Management'} />
+                        </ListItem>
+                        <ListItem button onClick={() => { props.history.push('/quiz') }}>
+                            <ListItemIcon><SchoolIcon /></ListItemIcon>
+                            <ListItemText primary={'Quiz (Interview)'} />
+                        </ListItem>
+                        <ListItem button onClick={() => { props.history.push('/manage-quiz') }}>
+                            <ListItemIcon><AddQuizIcon /></ListItemIcon>
+                            <ListItemText primary={'Manage Quiz'} />
                         </ListItem>
                     </List>
                 </div>
