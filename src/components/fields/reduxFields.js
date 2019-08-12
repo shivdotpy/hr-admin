@@ -29,12 +29,13 @@ export const renderSingleSelect = ({
     label,
     options,
     handleChange,
+    disabled,
     selected,
     fullWidth
 }) => {
 
     return (
-        <FormControl fullWidth={fullWidth ? fullWidth : null}>
+        <FormControl fullWidth={fullWidth ? fullWidth : null} disabled={disabled}>
             <InputLabel htmlFor="age-simple">{label}</InputLabel>
             <Select
                 value={selected}

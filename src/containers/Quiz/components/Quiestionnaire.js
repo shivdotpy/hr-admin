@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { renderSingleSelect } from '../../../components/fields/reduxFields';
 import { getSkills, getQuestionBySkill } from '../actions'
-import { Paper } from '@material-ui/core';
+import { Card, CardContent, RadioGroup, Radio, FormControlLabel, Checkbox, CardActions, Button } from '@material-ui/core';
 
 class Quiestionnaire extends Component {
 
@@ -12,7 +12,9 @@ class Quiestionnaire extends Component {
 
         this.state = {
             skillsArray: [],
-            selectedSkill: ''
+            selectedSkill: '',
+            disableDropdown: false,
+            questionIndex: 0
         }
     }
 
@@ -22,7 +24,8 @@ class Quiestionnaire extends Component {
 
     handleChange = (event) => {
         this.setState({
-            selectedSkill: event.target.value
+            selectedSkill: event.target.value,
+            disableDropdown: true
         }, () => {
             this.props.getQuestionBySkill(this.state.selectedSkill)
         })
@@ -37,6 +40,7 @@ class Quiestionnaire extends Component {
                             <Field
                                 name="skill"
                                 label="Skill"
+                                disabled={this.state.disableDropdown}
                                 selected={this.state.selectedSkill}
                                 handleChange={this.handleChange}
                                 options={this.props.skillsArray}
@@ -45,14 +49,50 @@ class Quiestionnaire extends Component {
                             />
                         </div>
                     </div>
-                    <div className="row mt-5">
-                        <div className="col-12">
-                            {this.props.questions_based_on_skill.map(question => {
-                                return (
-                                    <Paper className="p-3">
-                                        <p>{question.title}</p>
-                                    </Paper>
-                                )
+                    <div className="row mt-3">
+                        <div className="col-12 p-3">
+                            {this.props.questions_based_on_skill.map((question, index) => {
+
+                                if (this.state.questionIndex === index) {
+                                    return (
+                                        <Card>
+                                            <CardContent>
+                                                <h6 style={{ textTransform: 'uppercase' }}>{question.title}</h6>
+
+                                                {question.type === 'radio' ?
+
+                                                    <RadioGroup
+                                                        aria-label="gender"
+                                                        name="gender1"
+                                                        value="female"
+                                                    // onChange={handleChange}
+                                                    >
+                                                        {question.options.map(option => {
+                                                            return <FormControlLabel value={option.option} control={<Radio />} label={option.option} />
+                                                        }
+                                                        )}
+                                                    </RadioGroup> :
+
+                                                    <div>
+                                                        {question.options.map(option => {
+                                                            return <p><FormControlLabel
+                                                                control={<Checkbox checked={true} value="gilad" />}
+                                                                label="Gilad Gray"
+                                                            /></p>
+                                                        })}
+                                                    </div>
+
+                                                }
+
+                                                <CardActions className="d-flex flex-row-reverse">
+                                                    {this.props.questions_based_on_skill.length - 1 === index ?
+                                                        <Button variant="contained" color="secondary" className="ml-2">Finish</Button> : null}
+                                                    <Button variant="contained" color="primary" disabled={this.props.questions_based_on_skill.length - 1 === index} onClick={() => { this.setState({ questionIndex: this.state.questionIndex + 1 }) }}>Next</Button>
+                                                </CardActions>
+                                            </CardContent>
+                                        </Card>
+                                    )
+                                }
                             })}
                         </div>
                     </div>
