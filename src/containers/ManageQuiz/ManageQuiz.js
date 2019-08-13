@@ -2,17 +2,19 @@ import React, { Component } from 'react'
 import Header from '../../components/header/Header'
 import QuestionsTable from './components/QuestionsTable';
 import {connect} from 'react-redux';
-import {getAllQuestions} from './actions'
+import {Button} from '@material-ui/core'
 
 class ManageQuiz extends Component {
 
-    componentWillMount() {
-        this.props.getAllQuestions()
-    }
     render() {
         return (
             <div>
                 <Header history={this.props.history} />
+                <div className="row mx-5 mt-4 d-flex flex-row-reverse">
+                    <Button variant="contained" color="secondary" onClick={this.openEmployeeModal}>
+                        Add Question
+                    </Button>
+                </div>
                 <div className="mx-5 mt-4">
                     <QuestionsTable />
                 </div>
@@ -22,4 +24,4 @@ class ManageQuiz extends Component {
 }
 
 
-export default connect(null, {getAllQuestions})(ManageQuiz)
+export default connect(null, null)(ManageQuiz)

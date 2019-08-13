@@ -28,12 +28,6 @@ class EmployeesTable extends Component {
             tooltip: 'Delete Employee',
             onClick: (event, rowData) => this.props.deleteEmployee(rowData.empId),
             disabled: rowData.role === 'admin'
-          }),
-          rowData => ({
-            icon: 'eye',
-            tooltip: 'Delete Employee',
-            onClick: (event, rowData) => this.props.deleteEmployee(rowData.empId),
-            disabled: rowData.role === 'admin'
           })
         ]}
         options={{
