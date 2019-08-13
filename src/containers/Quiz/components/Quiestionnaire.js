@@ -92,6 +92,8 @@ class Quiestionnaire extends Component {
                                             </CardContent>
                                         </Card>
                                     )
+                                } else {
+                                    return null
                                 }
                             })}
                         </div>

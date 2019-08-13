@@ -9,10 +9,6 @@ class QuestionsTable extends Component {
         this.props.getAllQuestions()
     }
 
-    componentWillReceiveProps(nextProp) {
-        console.log(nextProp.manageQuiz)
-    }
-
     render() {
         return (
             <div>
@@ -50,7 +46,6 @@ class QuestionsTable extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('manageQuiz', state.manageQuiz)
     return {
         all_question_list: state.manageQuiz.all_question_list
     }
