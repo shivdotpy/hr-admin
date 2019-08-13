@@ -20,6 +20,45 @@ class QuestionModal extends Component {
 
         const { handleSubmit } = this.props;
 
+        const renderOptions = ({ fields, meta: { error, submitFailed } }) => (
+
+            <div>
+                {fields.map((member, index) => (
+                    <div className="row mt-3" key={index}>
+                        <div className="col-md-6" >
+                            {/* <button
+                            type="button"
+                            title="Remove Member"
+                            onClick={() => fields.remove(index)}
+                        /> */}
+                            <Field
+                                name={`${member}.option`}
+                                type="text"
+                                fullWidth={true}
+                                component={renderTextField}
+                                label="Option"
+                            />
+                        </div>
+                        <div className="col-md-6">
+                            <Field
+                                name={`${member}.correct`}
+                                type="text"
+                                fullWidth={true}
+                                component={renderTextField}
+                                label="Correct"
+                            />
+                        </div>
+                        {/* <FieldArray name={`${member}.hobbies`} component={renderHobbies} /> */}
+                    </div>
+            ))}
+                <div className="col-12 mt-3">
+                    <Button variant="contained" color="primary" onClick={() => fields.push({})}>
+                        Add Option
+                    </Button>
+                </div>
+            </div>
+        )
+
         return (
             <Dialog
                 open={this.props.openQuestionModal}
@@ -30,29 +69,36 @@ class QuestionModal extends Component {
                 <DialogTitle id="alert-dialog-slide-title">{`${this.props.questionModalTitle} Question`}</DialogTitle>
                 <DialogContent style={{ width: '600px' }}>
                     <form onSubmit={handleSubmit(this.onAddQuestionSubmit)}>
+
                         <div className="row">
+                            <div className="col-12">
+                                <Field
+                                    label="Title"
+                                    name="title"
+                                    fullWidth={true}
+                                    component={renderTextField}
+                                />
+                            </div>
+                        </div>
+                        <div className="row mt-3">
                             <div className="col-md-6">
                                 <Field
-                                    label="skill"
+                                    label="Skill"
                                     name="skill"
                                     fullWidth={true}
                                     component={renderTextField}
                                 />
                             </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-12">
+                            <div className="col-md-6">
                                 <Field
-                                    label="Question"
-                                    name="question"
+                                    label="Type"
+                                    name="type"
                                     fullWidth={true}
                                     component={renderTextField}
                                 />
                             </div>
                         </div>
-                        {/* <div className="row">
-                            <FieldArray name="members" component={renderTextField} />
-                        </div> */}
+                        <FieldArray name="options" component={renderOptions} />
                     </form>
                 </DialogContent>
                 <DialogActions>

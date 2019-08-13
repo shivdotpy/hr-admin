@@ -1,8 +1,8 @@
 const validate = (values) => {
     let error = {}
 
-    if (!values.question) {
-        error.question = 'Please enter question'
+    if (!values.title) {
+        error.title = 'Please enter question'
     }
 
     return error
