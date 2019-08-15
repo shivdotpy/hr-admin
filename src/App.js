@@ -22,11 +22,11 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path='/' exact component={Login} />
+        <Route path='/aa' exact component={Login} />
         <Route path='/dashboard' exact component={Dashboard} />
         <Route path='/employees' exact component={Employees} />
         <Route path='/quiz' exact component={Quiz} />
-        <Route path='/manage-quiz' exact component={ManageQuiz} />
+        <Route path='/' exact component={ManageQuiz} />
         <Route component={Page404} />
       </Switch>
       <Alert stack={{ limit: 2 }} />

@@ -4,6 +4,7 @@ import { Field, FieldArray, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { renderTextField } from '../../../components/fields/reduxFields';
 import validate from '../validations/validate';
+import {addQuestion} from '../actions'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -13,7 +14,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 class QuestionModal extends Component {
 
     onAddQuestionSubmit = (formProps) => {
-        console.log(formProps)
+        this.props.addQuestion(formProps)
     }
 
     render() {
@@ -118,7 +119,7 @@ const mapStateToProps = (state) => {
     return {}
 }
 
-export default connect(mapStateToProps, {})(reduxForm({
+export default connect(mapStateToProps, {addQuestion})(reduxForm({
     form: 'questionForm',
     enableReinitialize: true,
     validate

@@ -63,6 +63,7 @@ export default (state = initialState, { type, payload }) => {
                 loading: false,
                 questions_based_on_skill: []
             }
+        
         default:
             return state
     }

@@ -3,7 +3,8 @@ import {
     ADD_CANDIDATE_API,
     candidateActionTypes,
     GET_SKILLS_API,
-    GET_QUESTION_BASED_ON_SKILLS_API
+    GET_QUESTION_BASED_ON_SKILLS_API,
+    ADD_QUESTION_API
 } from '../constants';
 import { actionCreator, jsonApiHeader, getAccessTokenFromLocalStorage } from '../../../utils'
 
@@ -50,4 +51,5 @@ export const getQuestionBySkill = (skill) => {
                 dispatch(actionCreator(candidateActionTypes.get_question_based_on_skills_api.FAILURE))
             })
     }
-} 
+}
+

@@ -2,7 +2,8 @@ import { manageQuizActionTypes } from '../constants'
 
 const initialState = {
     loading: false,
-    all_question_list: []
+    all_question_list: [],
+    add_question: false
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -24,6 +25,24 @@ export default (state = initialState, { type, payload }) => {
                 ...state,
                 loading: false,
                 all_question_list: []
+            }
+        case manageQuizActionTypes.add_question.REQUEST:
+            return {
+                ...state,
+                loading: true,
+                add_question: false
+            }
+        case manageQuizActionTypes.add_question.SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                add_question: true
+            }
+        case manageQuizActionTypes.add_question.FAILURE:
+            return {
+                ...state,
+                loading: false,
+                add_question: false
             }
         default:
             return state
